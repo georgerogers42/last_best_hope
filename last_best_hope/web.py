@@ -7,4 +7,6 @@ app.register_blueprint(api.blueprint, url_prefix="/api")
 
 @app.route("/", methods=["GET"])
 def get_index():
-    return render_template("app/index.html")
+    with models.session() as s:
+        page = s.query(models.Page).filter("index" == models.Page.slug).first()
+        return render_template("app/index.html", page=page)

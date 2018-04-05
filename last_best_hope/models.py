@@ -37,5 +37,6 @@ class Page(Base, Encodable):
     id = Column(Integer, primary_key=True)
     slug = Column(String, nullable=False, unique=True)
     title = Column(String, nullable=False)
+    contents = Column(Text, nullable=False)
     ctime = Column(DateTime, nullable=False, default=datetime.now)
     utime = Column(DateTime, nullable=False, default=datetime.now)
