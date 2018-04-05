@@ -4,9 +4,13 @@ from datetime import datetime
 
 import arrow
 
+from markdown import markdown
+
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+
+from flask import escape
 
 from .ejson import Encodable
 
@@ -40,17 +44,20 @@ class Page(Base, Encodable):
     slug = Column(String, nullable=False, unique=True)
     title = Column(String, nullable=False)
     contents = Column(Text, nullable=False)
+    @property
+    def markdown(self):
+        return markdown(escape(self.contents))
     ctime = Column(DateTime, nullable=False, default=datetime.now)
     @property
     def arrow_ctime(self):
         return arrow.get(self.ctime)
-    @arrow_ctime.set
+    @arrow_ctime.setter
     def arrow_ctime(self, o):
         self.ctime = o.datetime
     utime = Column(DateTime, nullable=False, default=datetime.now)
     @property
     def arrow_utime(self):
         return arrow.get(self.utime)
-    @arrow_utime.set
+    @arrow_utime.setter
     def arrow_utime(self, o):
         self.ctime = o.datetime

@@ -15,7 +15,7 @@ def get_page(slug):
     with models.session() as s:
         page = s.query(models.Page).filter(slug == models.Page.slug).first()
         if page == None:
-            page = models.Page(slug=slug, title=slug, contents="", utime=datetime.now())
+            page = models.Page(slug=slug, title=slug, contents="", utime=arrow.get().datetime)
         return render_template("app/index.html", page=page)
 @app.route("/create/page/<path:slug>", methods=["POST"])
 def post_page(slug):
@@ -23,7 +23,8 @@ def post_page(slug):
         page = s.query(models.Page).filter(slug == models.Page.slug).first()
         if page == None:
             page = models.Page(slug=slug)
+            s.add(page)
         page.title = request.form["title"]
         page.contents = request.form["contents"]
-        page.utime = arrow.get().datetime
+        page.arrow_utime = arrow.get()
     return redirect(url_for("get_page", slug=slug))

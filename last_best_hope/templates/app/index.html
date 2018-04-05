@@ -1,12 +1,18 @@
+{% extends "layouts/default.html" %}
 {% block body %}
-<h1><a href="{{url_for("get_page", slug=page.slug)}}">{{ page.title }}</a></h1>
-<h2 class="date">{{ page.utime }}</h2>
-<div class="contents">
-  {{ page.contents }}
+<div class="masthead">
+  <h1><a href="{{url_for("get_index")}}">Last Best Hope</a></h1>
 </div>
-<form method="POST" action="{{url_for("post_page", slug=page.slug)}}">
-  <input type="text" name="title" value="{{page.title}}">
-  <textarea name="contents">{{ page.contents }}</textarea>
-  <input type="submit">
-</form>
+<div class="page">
+  <h1><a href="{{url_for("get_page", slug=page.slug)}}">{{ page.title }}</a></h1>
+  <h2 class="date">{{ page.utime }}</h2>
+  <div class="contents">
+    {{ page.markdown | safe }}
+  </div>
+  <form method="POST" action="{{url_for("post_page", slug=page.slug)}}">
+    <div><input type="text" name="title" value="{{page.title}}"></div>
+    <div><textarea rows="20" cols="160" name="contents">{{ page.contents }}</textarea></div>
+    <input type="submit">
+  </form>
+</div>
 {% endblock %}
