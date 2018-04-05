@@ -13,7 +13,7 @@ try:
 except KeyError:
     DATABASE_URL = "postgres://localhost/last_best_hope__dev"
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, echo=True)
 
 Session = sessionmaker(bind=engine)
 

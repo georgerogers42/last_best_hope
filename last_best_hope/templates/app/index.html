@@ -1,2 +1,12 @@
 {% block body %}
+<h1><a href="{{url_for("get_page", slug=page.slug)}}">{{ page.title }}</a></h1>
+<h2 class="date">{{ page.utime }}</h2>
+<div class="contents">
+  {{ page.contents }}
+</div>
+<form method="POST" action="{{url_for("post_page", slug=page.slug)}}">
+  <input type="text" name="title" value="{{page.title}}">
+  <textarea name="contents">{{ page.contents }}</textarea>
+  <input type="submit">
+</form>
 {% endblock %}
