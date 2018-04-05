@@ -1,5 +1,7 @@
 from os import environ
 from contextlib import contextmanager
+from datetime import datetime
+
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -35,3 +37,5 @@ class Page(Base, Encodable):
     id = Column(Integer, primary_key=True)
     slug = Column(String, nullable=False, unique=True)
     title = Column(String, nullable=False)
+    ctime = Column(DateTime, nullable=False, default=datetime.now)
+    utime = Column(DateTime, nullable=False, default=datetime.now)
