@@ -60,4 +60,4 @@ class Page(Base, Encodable):
         return arrow.get(self.utime)
     @arrow_utime.setter
     def arrow_utime(self, o):
-        self.ctime = o.datetime
+        self.utime = o.datetime
