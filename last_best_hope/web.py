@@ -17,8 +17,17 @@ def get_page(slug):
         if page == None:
             page = models.Page(slug=slug, title=slug, contents="", utime=arrow.get().datetime)
         return render_template("app/index.html", page=page)
-@app.route("/create/page/<path:slug>", methods=["POST"])
-def post_page(slug):
+
+@app.route("/edit/page/<path:slug>", methods=["GET"])
+def get_page_form(slug):
+    with models.session() as s:
+        page = s.query(models.Page).filter(slug == models.Page.slug).first()
+        if page == None:
+            page = models.Page(slug=slug, title=slug, contents="", utime=arrow.get().datetime)
+        return render_template("app/edit.html", page=page)
+
+@app.route("/edit/page/<path:slug>", methods=["POST"])
+def post_page_form(slug):
     with models.session() as s:
         page = s.query(models.Page).filter(slug == models.Page.slug).first()
         if page == None:

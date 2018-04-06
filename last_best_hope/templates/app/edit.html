@@ -9,6 +9,10 @@
   <div class="contents">
     {{ page.markdown | safe }}
   </div>
-  <a href="{{url_for("get_page_form", slug=page.slug)}}">Edit</a>
+  <form method="POST" action="{{url_for("post_page_form", slug=page.slug)}}">
+    <div><input type="text" name="title" value="{{page.title}}"></div>
+    <div><textarea rows="20" cols="160" name="contents">{{ page.contents }}</textarea></div>
+    <input type="submit">
+  </form>
 </div>
 {% endblock %}
