@@ -8,7 +8,9 @@ body {
 .page h1 {
   font-size: 24pt;
 }
-
+.page h2 {
+  font-size: 20pt;
+}
 #master {
   width: 7.5in;
   margin: auto;
