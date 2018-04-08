@@ -8,3 +8,8 @@ body {
 .page h1 {
   font-size: 48pt;
 }
+
+#master {
+  width: 7.5in;
+  margin: auto;
+}
